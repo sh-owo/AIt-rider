@@ -17,13 +17,13 @@ public class Background_moving : MonoBehaviour
     {
         Vector3 position = car.transform.position;
         Vector3 newposition = transform.position;
-        if (transform.position.y + 60 < car.transform.position.y)
+        if (transform.position.y + 20 < car.transform.position.y)
         {
-            newposition.y = position.y + 60;
+            newposition.y = position.y + 20;
         }
-        if (transform.position.y - 60 > car.transform.position.y)
+        if (transform.position.y - 20 > car.transform.position.y)
         {
-            newposition.y = position.y - 60;
+            newposition.y = position.y - 20;
         }
         
         if (transform.position.x != car.transform.position.x)
