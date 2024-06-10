@@ -749,7 +749,7 @@ GameObject:
   - component: {fileID: 118309813}
   m_Layer: 0
   m_Name: Checkpoint2
-  m_TagString: Untagged
+  m_TagString: Checkpoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -833,7 +833,7 @@ GameObject:
   - component: {fileID: 147806589}
   m_Layer: 0
   m_Name: Checkpoint5
-  m_TagString: Untagged
+  m_TagString: Checkpoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1001,7 +1001,7 @@ GameObject:
   - component: {fileID: 175580064}
   m_Layer: 0
   m_Name: Checkpoint17
-  m_TagString: Untagged
+  m_TagString: Checkpoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1121,7 +1121,7 @@ GameObject:
   - component: {fileID: 198074743}
   m_Layer: 0
   m_Name: Checkpoint11
-  m_TagString: Untagged
+  m_TagString: Checkpoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1437,7 +1437,10 @@ GameObject:
   - component: {fileID: 216056276}
   - component: {fileID: 216056275}
   - component: {fileID: 216056274}
-  - component: {fileID: 216056277}
+  - component: {fileID: 216056280}
+  - component: {fileID: 216056279}
+  - component: {fileID: 216056278}
+  - component: {fileID: 216056281}
   m_Layer: 0
   m_Name: Bot1
   m_TagString: Player
@@ -1523,7 +1526,32 @@ Transform:
   - {fileID: 782818469}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &216056277
+--- !u!114 &216056278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 216056270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f67c7e722ba14acd9153bb4488bff6e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: RayPerceptionSensor
+  m_DetectableTags:
+  - Checkpoint
+  m_RaysPerDirection: 7
+  m_MaxRayDegrees: 58.1
+  m_SphereCastRadius: 0.5
+  m_RayLength: 30
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967291
+  m_ObservationStacks: 1
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+--- !u!114 &216056279
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1536,23 +1564,73 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 1
-    NumStackedVectorObservations: 1
+    VectorObservationSize: 6
+    NumStackedVectorObservations: 2
     m_ActionSpec:
-      m_NumContinuousActions: 0
+      m_NumContinuousActions: 2
       BranchSizes: 01000000
-    VectorActionSize: 01000000
+    VectorActionSize: 
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
     hasUpgradedBrainParametersWithActionSpec: 1
   m_Model: {fileID: 0}
   m_InferenceDevice: 0
-  m_BehaviorType: 0
+  m_BehaviorType: 1
   m_BehaviorName: My Behavior
   TeamId: 0
   m_UseChildSensors: 1
   m_UseChildActuators: 1
   m_ObservableAttributeHandling: 0
+--- !u!114 &216056280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 216056270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DecisionPeriod: 5
+  TakeActionsBetweenDecisions: 1
+--- !u!114 &216056281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 216056270}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb0d44f12cd034529831bcd68c5abf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentParameters:
+    maxStep: 0
+  hasUpgradedFromAgentParameters: 1
+  MaxStep: 0
+  checkpoints:
+  - {fileID: 1979438761}
+  - {fileID: 118309812}
+  - {fileID: 407283916}
+  - {fileID: 710366751}
+  - {fileID: 147806588}
+  - {fileID: 221400285}
+  - {fileID: 966881368}
+  - {fileID: 1100768473}
+  - {fileID: 2103383294}
+  - {fileID: 604112036}
+  - {fileID: 198074742}
+  - {fileID: 1207918623}
+  - {fileID: 1317204191}
+  - {fileID: 2103072569}
+  - {fileID: 458941681}
+  - {fileID: 1977582974}
+  - {fileID: 175580063}
+  speed: 10
+  turnSpeed: 5
 --- !u!1 &221400284
 GameObject:
   m_ObjectHideFlags: 0
@@ -1565,7 +1643,7 @@ GameObject:
   - component: {fileID: 221400286}
   m_Layer: 0
   m_Name: Checkpoint6
-  m_TagString: Untagged
+  m_TagString: Checkpoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2741,7 +2819,7 @@ GameObject:
   - component: {fileID: 407283917}
   m_Layer: 0
   m_Name: Checkpoint3
-  m_TagString: Untagged
+  m_TagString: Checkpoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3123,7 +3201,7 @@ GameObject:
   - component: {fileID: 458941682}
   m_Layer: 0
   m_Name: Checkpoint15
-  m_TagString: Untagged
+  m_TagString: Checkpoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4180,7 +4258,7 @@ GameObject:
   - component: {fileID: 604112037}
   m_Layer: 0
   m_Name: Checkpoint10
-  m_TagString: Untagged
+  m_TagString: Checkpoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4706,7 +4784,7 @@ Transform:
   m_GameObject: {fileID: 685614855}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4789,7 +4867,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Current_speed: 0
   Currnet_rotation: 0
-  Moving_speed: 0
+  Rotation_speed: 0
   Boost_delay_time: 5
   Current_delay_time: 6
   rb: {fileID: 0}
@@ -4805,7 +4883,7 @@ GameObject:
   - component: {fileID: 710366752}
   m_Layer: 0
   m_Name: Checkpoint4
-  m_TagString: Untagged
+  m_TagString: Checkpoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6306,7 +6384,7 @@ GameObject:
   - component: {fileID: 966881369}
   m_Layer: 0
   m_Name: Checkpoint7
-  m_TagString: Untagged
+  m_TagString: Checkpoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6948,7 +7026,7 @@ GameObject:
   - component: {fileID: 1100768474}
   m_Layer: 0
   m_Name: Checkpoint8
-  m_TagString: Untagged
+  m_TagString: Checkpoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7422,7 +7500,7 @@ GameObject:
   - component: {fileID: 1207918624}
   m_Layer: 0
   m_Name: Checkpoint12
-  m_TagString: Untagged
+  m_TagString: Checkpoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7986,7 +8064,7 @@ GameObject:
   - component: {fileID: 1317204192}
   m_Layer: 0
   m_Name: Checkpoint13
-  m_TagString: Untagged
+  m_TagString: Checkpoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10223,7 +10301,7 @@ GameObject:
   - component: {fileID: 1977582975}
   m_Layer: 0
   m_Name: Checkpoint16
-  m_TagString: Untagged
+  m_TagString: Checkpoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10307,7 +10385,7 @@ GameObject:
   - component: {fileID: 1979438762}
   m_Layer: 0
   m_Name: Checkpoint1
-  m_TagString: Untagged
+  m_TagString: Checkpoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10905,7 +10983,7 @@ GameObject:
   - component: {fileID: 2103072570}
   m_Layer: 0
   m_Name: Checkpoint14
-  m_TagString: Untagged
+  m_TagString: Checkpoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10989,7 +11067,7 @@ GameObject:
   - component: {fileID: 2103383295}
   m_Layer: 0
   m_Name: Checkpoint9
-  m_TagString: Untagged
+  m_TagString: Checkpoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11158,7 +11236,7 @@ GameObject:
   - component: {fileID: 2122174152}
   m_Layer: 0
   m_Name: Track
-  m_TagString: Untagged
+  m_TagString: Track
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -10,8 +10,8 @@ public class New_Car_move : MonoBehaviour
     public float Current_speed = 0f;
     public float Currnet_rotation = 0f;
     
-    public float Moving_speed = 0f;
-    private float Rotation_speed = 0f;
+    private float Moving_speed = 0f;
+    public float Rotation_speed = 0f;
     private float Maxspeed = 30f;
     // private float Maxrotation = 40f;
     
@@ -109,7 +109,7 @@ public class New_Car_move : MonoBehaviour
             Boost_delay_time += Time.deltaTime;
             Current_delay_time += Time.deltaTime;
             Current_speed = Mathf.Lerp(Current_speed, 0, Time.deltaTime * 2);
-            Currnet_rotation /= 1.5f;
+            Currnet_rotation = Mathf.Lerp(Currnet_rotation, 0, 0.3f);
         }
     }
     
