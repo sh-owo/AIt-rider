@@ -11,10 +11,11 @@ public class CarAgent2D : Agent
     private int currentCheckpointIndex = 0;
 
     private Rigidbody2D rb;
-
+    private Vector3 initalPosition;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        initalPosition = transform.localPosition;
     }
 
     public override void OnEpisodeBegin()
@@ -24,8 +25,9 @@ public class CarAgent2D : Agent
         currentCheckpointIndex = 0;
 
         // 에이전트 위치와 회전 초기화
-        transform.localPosition = Vector3.zero;
+        transform.localPosition = initalPosition;
         transform.localRotation = Quaternion.identity;
+        
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -35,6 +37,7 @@ public class CarAgent2D : Agent
         sensor.AddObservation(directionToCheckpoint);
         sensor.AddObservation(transform.up);
         sensor.AddObservation(rb.velocity);
+        
     }
 
     public override void OnActionReceived(ActionBuffers actions)
@@ -53,6 +56,8 @@ public class CarAgent2D : Agent
             currentCheckpointIndex = (currentCheckpointIndex + 1) % checkpoints.Length;
             AddReward(1.0f);
         }
+
+        Debug.Log("Action received: " + forwardAmount + ", " + turnAmount);
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
@@ -60,14 +65,22 @@ public class CarAgent2D : Agent
         var continuousActionsOut = actionsOut.ContinuousActions;
         continuousActionsOut[0] = Input.GetAxis("Vertical");
         continuousActionsOut[1] = Input.GetAxis("Horizontal");
+
+        Debug.Log("Heuristic actions: " + continuousActionsOut[0] + ", " + continuousActionsOut[1]);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Track"))
         {
-            AddReward(-1.0f); // 보상을 삭감
+            AddReward(-0.3f); // 보상을 삭감
             EndEpisode();     // 에피소드를 종료
         }
+
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            EndEpisode();
+        }
+        // if(collision.gameObject.CompareTag("Goal"))
     }
 }
