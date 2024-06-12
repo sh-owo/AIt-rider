@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.Sensors;
@@ -74,7 +75,6 @@ public class CarAgent2D : Agent
         sensor.AddObservation(directionToCheckpoint);
         sensor.AddObservation(transform.up);
         sensor.AddObservation(rb.velocity);
-        
     }
 
     public override void OnActionReceived(ActionBuffers actions)
