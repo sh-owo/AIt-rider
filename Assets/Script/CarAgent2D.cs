@@ -104,10 +104,7 @@ public class CarAgent2D : Agent
         }
         
         previous_distance = current;
-
-
-
-        // Debug.Log("Action received: " + forwardAmount + ", " + turnAmount);
+        
         Debug.Log(checkpoints[currentCheckpointIndex].gameObject.name+" "+currentCheckpointIndex);
     }
 
@@ -125,13 +122,13 @@ public class CarAgent2D : Agent
         if (collision.gameObject.CompareTag("Track"))
         {
             AddReward(-0.3f); // 보상을 삭감
-            EndEpisode();     // 에피소드를 종료
+            //EndEpisode();     // 에피소드를 종료
         }
 
-        if (collision.gameObject.CompareTag("Player"))
+        /*if (collision.gameObject.CompareTag("Player"))
         {
             EndEpisode();
-        }
+        }*/
 
         if (collision.gameObject.CompareTag("Checkpoint"))
         {
@@ -153,13 +150,12 @@ public class CarAgent2D : Agent
             
             AddReward(3f);
         }
-        
-        if (collision.gameObject.name.Contains("Bot")) {
 
+        if (collision.gameObject.CompareTag("Goal"))
+        {
+            AddReward(5f);
+            EndEpisode();
         }
-        
-        
-        // if(collision.gameObject.CompareTag("Goal"))
     }
 
     public void OnTriggerEnter2D(Collider2D collision) {
