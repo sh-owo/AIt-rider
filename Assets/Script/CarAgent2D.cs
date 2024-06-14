@@ -13,6 +13,8 @@ public class CarAgent2D : Agent
     public float turnSpeed = 50f;
     private int currentCheckpointIndex = 0;
 
+    private Countdown countdown;
+
     private Rigidbody2D rb;
     private Vector3 initalPosition;
 
@@ -30,6 +32,7 @@ public class CarAgent2D : Agent
         rb = GetComponent<Rigidbody2D>();
         initalPosition = transform.localPosition;
         previous_distance = float.MaxValue;
+        countdown = FindObjectOfType<Countdown>();
         getChecks();
     }
 
@@ -79,33 +82,37 @@ public class CarAgent2D : Agent
 
     public override void OnActionReceived(ActionBuffers actions)
     {
-        float forwardAmount = actions.ContinuousActions[0];
-        float turnAmount = actions.ContinuousActions[1];
+        if (countdown != null && countdown.start)
+        {
+            float forwardAmount = actions.ContinuousActions[0];
+            float turnAmount = actions.ContinuousActions[1];
 
-        Vector2 forward = transform.up * forwardAmount * speed * Time.deltaTime;
-        rb.MovePosition(rb.position + forward);
+            Vector2 forward = transform.up * forwardAmount * speed * Time.deltaTime;
+            rb.MovePosition(rb.position + forward);
 
-        float turn = turnAmount * turnSpeed * Time.deltaTime;
-        transform.Rotate(0, 0, -turn);
+            float turn = turnAmount * turnSpeed * Time.deltaTime;
+            transform.Rotate(0, 0, -turn);
 
-        float current = Vector2.Distance(transform.position, checkpoints[currentCheckpointIndex].position);
+            float current = Vector2.Distance(transform.position, checkpoints[currentCheckpointIndex].position);
 
-        for (int i = 1; i <= 5; i++) {
-            if (current < 0.3f*i) {
-                AddReward(5f/i);
-                break;
-            }
-            if (current > previous_distance) {
-                AddReward(-5f/i);
-                break;
+            for (int i = 1; i <= 5; i++) {
+                if (current < 0.3f*i) {
+                    AddReward(5f/i);
+                    break;
+                }
+                if (current > previous_distance) {
+                    AddReward(-5f/i);
+                    break;
+                }
+                
+                
             }
             
-            
+            previous_distance = current;
         }
         
-        previous_distance = current;
         
-        Debug.Log(checkpoints[currentCheckpointIndex].gameObject.name+" "+currentCheckpointIndex);
+        // Debug.Log(checkpoints[currentCheckpointIndex].gameObject.name+" "+currentCheckpointIndex);
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)

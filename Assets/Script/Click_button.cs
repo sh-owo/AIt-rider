@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -17,8 +18,19 @@ public class Click_button : MonoBehaviour
         
     }
 
-    public void OnclickButton()
+    public void StartDrive()
     {
         SceneManager.LoadScene("DrivingScene");
     }
+
+    public void Howtodo()
+    {
+        SceneManager.LoadScene("toHow");
+    }
+
+    public void back()
+    {
+        SceneManager.LoadScene("Start Menu");
+    }
+    
 }
