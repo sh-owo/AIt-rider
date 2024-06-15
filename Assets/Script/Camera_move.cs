@@ -16,6 +16,7 @@ public class Camera_move : MonoBehaviour
 
     private void Start()
     {
+        Screen.SetResolution(800,500, false);
         Application.targetFrameRate = 60;
         countdown = FindObjectOfType<Countdown>();
     }
@@ -40,7 +41,7 @@ public class Camera_move : MonoBehaviour
         
         
         /*if (!countdown.start)
-        {
+        
             camera.orthographicSize -= zoomrate * Time.deltaTime * 3f;
         }
         else
