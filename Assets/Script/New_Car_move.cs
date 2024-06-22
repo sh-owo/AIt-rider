@@ -32,7 +32,7 @@ public class New_Car_move : MonoBehaviour
         Screen.SetResolution(1920, 1080, fullscreen: true);
         rb = GetComponent<Rigidbody2D>();
         countdown = FindObjectOfType<Countdown>();
-        Application.targetFrameRate = 60;
+        // Application.targetFrameRate = 60;
     }
 
     // Update is called once per frame
